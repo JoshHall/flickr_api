@@ -7,7 +7,6 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 
 
-
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 def index():
@@ -16,7 +15,7 @@ def index():
 
 
     if form.validate_on_submit():
-        key = 'bac23798ff983487c4a77e9bc7da0d7b'
+        key = app.config['API_KEY']
         to_search = form.title.data
         request_url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key={}&tags={}&per_page=20&format=json&nojsoncallback=1'.format(key, to_search)
         data = requests.get(request_url).json()
